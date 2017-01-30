@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {{post.render() | safe}}
+  <br><a href="/blog"><button type="button" class="button">Go Back</button></br>
+{% endblock %}

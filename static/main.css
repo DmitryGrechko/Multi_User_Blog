@@ -1,0 +1,172 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+}
+
+label + label {
+    margin-top: 20px;
+}
+
+input[type=text] {
+    width: 500px;
+    font-size: 20px;
+    padding: 2px;
+    font-family: monospace;
+}
+
+textarea {
+  width: 500px;
+  height: 400px;
+  font-size: 17px;
+  font-family: monospace;
+}
+
+input[type=submit] {
+  font-size: 24px;
+}
+
+.main-title {
+    display: block;
+    color: #16a1d5;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+
+.post + .post {
+    margin-top: 15px;
+}
+
+.post-heading {
+    position: relative;
+    border-bottom: 3px solid #666;
+}
+
+.post-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.post-date {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+}
+
+.post-content {
+    margin-top: 5px;
+}
+
+.post-author {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: #999;
+}
+
+.button {
+    background-color: #12a7cf;
+    border: none;
+    color: white;
+    padding: 13px 26px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    width: 120px;
+}
+.button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+.button1 {
+    background-color: #cf1212;
+    border: none;
+    color: white;
+    padding: 13px 26px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    width: 130px;
+    max-height: 43px;
+}
+.button1:hover {
+    background-color: #e82e2e;
+    color: white;
+}
+
+.button2 {
+    background-color: #9b11b1;
+    border: none;
+    color: white;
+    padding: 13px 26px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    width: 120px;
+}
+.button2:hover {
+    background-color: #ffe600;
+    color: white;
+}
+
+.button3 {
+  background-color: #0028f9;
+  color: white;
+  padding: 13px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  width: 120px;
+  max-height: 43px;
+}
+
+.grid {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.row {
+  width: 24%;
+  display: inline-block;
+  flex-wrap: wrap;
+  height: ;
+  max-height: 43px;
+}
+
+.row1 {
+  width: 30%;
+  margin-left: 90px;
+  display: inline-block;
+  flex-wrap: wrap;
+  height: ;
+  max-height: 43px;
+}
