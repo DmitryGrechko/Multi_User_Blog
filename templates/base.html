@@ -2,18 +2,36 @@
 <html>
 
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link type="text/css" rel="stylesheet" href="/static/main.css" />
-
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
         <title>CS 253 Blog</title>
     </head>
 
     <body>
-        <a href="/blog" class="main-title">
-    CS 253 Blog
-  </a>
-
-        <div id="content">
-            {% block content %} {% endblock %}
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <a href="/blog" class="main-title text-center">
+                CS 253 Blog
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <a href="/blog/newpost">
+                <button type="button" class="button2">New Post</button>
+              </a>
+              <a href="/logout">
+                <button type="button" class="button2">Logout</button>
+              </a>
+            </div>
+          </div>
+          <div id="content">
+              {% block content %} {% endblock %}
+          </div>
         </div>
     </body>
 

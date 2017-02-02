@@ -3,66 +3,60 @@
 <html>
 
     <head>
-        <title>Unit 2 Rot 13</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Signup</title>
         <link type="text/css" rel="stylesheet" href="/static/main.css" />
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
     </head>
 
-    <body>
-        <h2>Signup</h2>
-        <form method="post">
-            <table>
-                <tr>
-                    <td class="label">
-                        Username
-                    </td>
-                    <td>
-                        <input type="text" name="username" value="{{username}}">
-                    </td>
-                    <td class="error">
-                        {{error_username}}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="label">
-                        Password
-                    </td>
-                    <td>
-                        <input type="password" name="password" value="">
-                    </td>
-                    <td class="error">
-                        {{error_password}}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="label">
-                        Verify Password
-                    </td>
-                    <td>
-                        <input type="password" name="verify" value="">
-                    </td>
-                    <td class="error">
-                        {{error_verify}}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="label">
-                        Email (optional)
-                    </td>
-                    <td>
-                        <input type="text" name="email" value="{{email}}">
-                    </td>
-                    <td class="error">
-                        {{error_email}}
-                    </td>
-                </tr>
-            </table>
-
-            <input type="submit" class="button">
-            <a href="/login"><button type="button" class="button">Login</button></a>
-        </form>
+    <body background="/img/background.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="color: white;" class="text-center">Signup</h2>
+                </div>
+            </div>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label for="username" style="color: white;" class="col-sm-2 control-label text-right">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="username" value="{{username}}" class="form-control" id="username"
+                            placeholder="Username">
+                        <p class="error">{{error_username}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" style="color: white;" class="col-sm-2 control-label text-right">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" value="" class="form-control" id="password"
+                            placeholder="Password">
+                        <p class="error">{{error_password}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="verifypassword" style="color: white;" class="col-sm-2 control-label text-right">Verify Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="verify" value="" class="form-control" id="verify" placeholder="Verify Password">
+                        <p class="error">{{error_verify}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" style="color: white;" class="col-sm-2 control-label text-right">Email(optional)</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="Email" placeholder="Email">
+                        <p class="error">{{error_email}}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="button">Sign Up</button>
+                        <a href="/login"><button type="button" class="button">Login</button></a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
 
 </html>

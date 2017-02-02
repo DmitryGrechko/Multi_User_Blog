@@ -4,39 +4,45 @@
 
     <head>
         <title>Login</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link type="text/css" rel="stylesheet" href="/static/main.css" />
-
+        <link rel="stylesheet" href="/static/bootstrap.min.css">
     </head>
 
-    <body>
-        <h2>Login</h2>
-        <form method="post">
-            <table>
-                <tr>
-                    <td class="label">
-                        Username
-                    </td>
-                    <td>
-                        <input type="text" name="username" value="{{username}}">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="label">
-                        Password
-                    </td>
-                    <td>
-                        <input type="password" name="password" value="">
-                    </td>
-                </tr>
-            </table>
-
-            <div class="error">
-                {{error}}
+    <body background="/img/background.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="text-align:center; color: white;">Login</h2>
+                </div>
             </div>
-
-            <input type="submit" class="button">
-        </form>
+            <form class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label for="username" style="color: white;" class="col-sm-2 control-label text-right">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="username" value="{{username}}" class="form-control" id="username"
+                            placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" style="color: white;" class="col-sm-2 control-label text-right">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="password" value="" class="form-control" id="password"
+                            placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <br />
+                        <button type="submit" class="button">Login</button>
+                        <a href="/signup"><button type="button" class="button">Signup</button></a>
+                        <p class="error">{{error}}</p>
+                    </div>
+                </div>
+            </form>
+        </div>
     </body>
 
 </html>

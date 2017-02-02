@@ -14,13 +14,8 @@
 	</div>
 	<form method="post" class="form-horizontal">
 		<div class="form-group text-center">
-			<label for="subject">Subject</label>
-			<input type="text" name="subject" value="{{ post.subject }}">
-		</div>
-		<br />
-		<div class="form-group text-center">
 			<label for="content">Content</label>
-			<textarea name="content">{{ post.content }}</textarea>
+			<textarea name="content">{{content}}</textarea>
 			<p class="error">{{error}}</p>
 		</div>
 		<div class="form-group text-center">

@@ -1,17 +1,23 @@
-<div class="post">
-  <div class="post-heading">
-    <div class="post-title">
+
+<div class="row post post-heading">
+    <div class="col-md-6 post-title">
       {{p.subject}}
     </div>
-    <div class="post-author">
-      {{p.uname}}
+    <div class="col-md-6 post-date text-right">
+      <p>{{p.author}} </p>
+      <p>{{p.created.strftime("%b %d, %Y")}}</p>
     </div>
-    <div class="post-date">
-      {{p.created.strftime("%b %d, %Y")}}
-    </div>
-  </div>
-
-  <div class="post-content">
+</div>
+<div class="row">
+  <div class="col-md-12 post-content">
     {{p._render_text | safe}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 text-right">
+      <form method="post">
+          <button name="like" type="submit" class="button3">Like {{p.likes}}</button>
+      </form>
+      {{error}}
   </div>
 </div>

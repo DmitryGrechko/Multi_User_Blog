@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-      <h1 class="text-center">New Post</h1>
+      <h1 class="text-center">New Comment</h1>
     </div>
 </div>
 <div class="row">
@@ -13,13 +13,8 @@
 </div>
 <form method="post" class="form-horizontal">
   <div class="form-group text-center">
-    <label for="subject">Subject</label>
-    <input type="text" name="subject" value="{{subject}}">
-  </div>
-  <br />
-  <div class="form-group text-center">
-    <label for="content">Content</label>
-    <textarea name="content">{{content}}</textarea>
+    <label for="comment">Comment</label>
+    <textarea name="comment">{{content}}</textarea>
     <p class="error">{{error}}</p>
   </div>
   <div class="form-group text-center">

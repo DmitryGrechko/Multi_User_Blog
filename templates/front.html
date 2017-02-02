@@ -1,40 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<br />
+<div style="color: #999; text-align: center;">
+  You are Logged in as {{author}}
+</div>
   {% for p in posts %}
     {{ p.render() | safe }}
     <br />
-    <div class="grid">
       <div class="row">
-        <a href="/blog/{{p.key().id()}}">
-          <button type="button" class="button">View Post</button>
-        </a>
+        <div class="col-md-3">
+          <a href="/blog/{{p.key().id()}}">
+              <button type="button" class="button">View Post</button>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="/blog/editpost/{{p.key().id()}}">
+              <button type="button" class="button">Edit Post</button>
+            </a>
+        </div>
+        <div class="col-md-3">
+          <a href="/blog/deletepost/{{p.key().id()}}">
+              <button type="button" class="button1">Delete Post</button>
+          </a>
+        </div>
+        <div class="col-md-3">
+          <a href="/blog/commentspage/{{p.key().id()}}">
+              <button type="button" class="button">Comments</button>
+          </a>
+        </div>
       </div>
-      <div class="row">
-        <a href="/blog/editpost/{{p.key().id()}}">
-          <button type="button" class="button">Edit Post</button>
-        </a>
-      </div>
-      <div class="row">
-        <a href="/blog/deletepost/{{p.key().id()}}">
-          <button type="button" class="button1">Delete Post</button>
-        </a>
-      </div>
-    </div>
     <br />
   {% endfor %}
-    <br />
-    <div class="grid">
-      <div class="row1">
-        <a href="/blog/newpost">
-          <button type="button" class="button2">New Post</button>
-        </a>
-      </div>
-      <div class="row1">
-        <a href="/logout">
-          <button type="button" class="button2">Logout</button>
-        </a>
-      </div>
-    </div>
 {% endblock %}
