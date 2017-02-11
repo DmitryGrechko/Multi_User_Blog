@@ -1,26 +1,27 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="row">
     <div class="col-md-12">
-      <h1 class="text-center">New Comment</h1>
+        <h1 class="text-center">New Comment</h1>
     </div>
 </div>
 <div class="row">
-  <div class="col-md-12" style="color: #999;">
-    Author: {{author}}
-  </div>
+    <div class="col-md-12" style="color: #999;">
+        Author: {{name}}
+    </div>
 </div>
 <form method="post" class="form-horizontal">
-  <div class="form-group text-center">
-    <label for="comment">Comment</label>
-    <textarea name="comment">{{content}}</textarea>
-    <p class="error">{{error}}</p>
-  </div>
-  <div class="form-group text-center">
-      <div class="col-md-12 text-center">
-        <input type="submit" class="button">
-        <a href="/blog"><button type="button" class="button">Go Back</button>
+    <div class="form-group text-center">
+        <label for="comment">Comment</label>
+        <textarea name="content">{{content}}</textarea>
+        <p class="error">{{error}}</p>
+        <input type="hidden"  name="name" value="{{name}}">
+        <input type="hidden" name="postId" value="{{postId}}">
+        {{request}}
+    </div>
+    <div class="form-group text-center">
+        <div class="col-md-12 text-center">
+            <input type="submit" class="button">
+            <a href="/blog"><button type="button" class="button">Go Back</button>
       </div>
   </div>
 </form>

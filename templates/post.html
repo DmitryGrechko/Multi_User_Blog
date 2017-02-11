@@ -1,23 +1,48 @@
-
 <div class="row post post-heading">
     <div class="col-md-6 post-title">
-      {{p.subject}}
+        {{p.subject}}
     </div>
     <div class="col-md-6 post-date text-right">
-      <p>{{p.author}} </p>
-      <p>{{p.created.strftime("%b %d, %Y")}}</p>
+        <p>{{p.author}} </p>
+        <p>{{p.created.strftime("%b %d, %Y")}}</p>
     </div>
 </div>
 <div class="row">
-  <div class="col-md-12 post-content">
-    {{p._render_text | safe}}
-  </div>
+    <div class="col-md-12 post-content">
+        {{p._render_text | safe}}
+    </div>
 </div>
 <div class="row">
-  <div class="col-md-12 text-right">
-      <form method="post">
-          <button name="like" type="submit" class="button3">Like {{p.likes}}</button>
-      </form>
-      {{error}}
-  </div>
+    <div class="col-md-12 text-right">
+        <form action="/blog/{{p.key().id()}}/like" method="post">
+            <button name="like" type="submit" class="button3">Like {{p.likes}}</button>
+        </form>
+        {{error}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-right">
+        <h3>Comments</h3>
+{% for c in comments %}
+    {% if p.key().id() == c.post_id.key().id() %}
+    <div class="dialogbox">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="body col-md-4">
+            <span class="tip tip-up"></span>
+            <div class="message">
+                <span>{{c.content}}</span>
+                <p>{{c.name}} | {{c.created.strftime("%b %d, %Y")}} </p>
+                <a href="/blog/editcomment/{{c.key().id()}}" class="nav-comments">Edit Comment</a>
+                <span> | </span>
+                <a href="/blog/deletecomment/{{c.key().id()}}" class="nav-comments">Delete Comment</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
+
+    </div>
 </div>
