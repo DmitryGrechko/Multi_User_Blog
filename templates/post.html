@@ -21,15 +21,33 @@
     </div>
 </div>
 <div class="row">
+  <div class="col-md-3">
+    <a href="/blog/{{p.key().id()}}">
+        <button type="button" class="button">View Post</button>
+    </a>
+  </div>
+  <div class="col-md-3">
+    <a href="/blog/editpost/{{p.key().id()}}">
+        <button type="button" class="button">Edit Post</button>
+      </a>
+  </div>
+  <div class="col-md-3">
+    <a href="/blog/deletepost/{{p.key().id()}}">
+        <button type="button" class="button1">Delete Post</button>
+    </a>
+  </div>
+  <div class="col-md-3">
+    <a href="/blog/newcomment/{{p.key().id()}}">
+        <button type="button" class="button">New Comment</button>
+    </a>
+  </div>
+</div>
+<div class="row">
     <div class="col-md-12 text-right">
-        <h3>Comments</h3>
+        <h3 class="text-center">Comments</h3>
 {% for c in comments %}
     {% if p.key().id() == c.post_id.key().id() %}
     <div class="dialogbox">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-4">
-        </div>
         <div class="body col-md-4">
             <span class="tip tip-up"></span>
             <div class="message">
@@ -39,10 +57,13 @@
                 <span> | </span>
                 <a href="/blog/deletecomment/{{c.key().id()}}" class="nav-comments">Delete Comment</a>
             </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
         </div>
     </div>
     {% endif %}
 {% endfor %}
-
     </div>
 </div>

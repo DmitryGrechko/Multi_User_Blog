@@ -331,7 +331,7 @@ class NewComment(BlogHandler):
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
             posts = db.get(key)
 
-            if posts == None:
+            if posts is None:
                 return self.redirect('/blog')
 
             if content:
@@ -347,40 +347,40 @@ class NewComment(BlogHandler):
 
 class EditComment(BlogHandler):
 
-    # Edit post (checks whether a user loged in, post exists, and permission)
+    # Updates changed Comment information in the datatbase
 
     def get(self, post_id):
         if self.user:
             key = db.Key.from_path('Comment', int(post_id))
             comments = db.get(key)
-            if comments == None or comments.name != self.user.name:
-                return self.redirect('/blog')
-            self.render("editcomment.html", comments=comments)
+            if not comments:
+                self.error(404)
+                return
+            elif self.user.name == comments.name:
+                name = comments.name
+                self.render("editcomment.html", comments=comments, name=name)
+            else:
+                self.redirect("/editcommenterror")
         else:
-            return self.redirect('/login')
-
-# Updates changed information in the datatbase
+            self.redirect("/login")
 
     def post(self, post_id):
+        key = db.Key.from_path('Comment', int(post_id))
+        comments = db.get(key)
+
         if not self.user:
             self.redirect('/blog')
 
         content = self.request.get('content')
-        author = self.request.get('author')
-        key = db.Key.from_path('Comment', int(comment_id))
-        comments = db.get(key)
-        if comments == None or comments.author != self.user.name:
-            return self.redirect('/blog')
 
         if content:
             comments.content = content
-            comments.author = author
             comments.put()
             self.redirect('/blog')
         else:
-            error = "You haven't written your post!!"
-            self.render("editpost.html", content=content,
-                        error=error, author=author)
+            error = "You haven't written your comment!!"
+            self.render("editcomment.html", content=content,
+                        error=error)
 
 
 class EditCommentError(BlogHandler):
@@ -388,29 +388,31 @@ class EditCommentError(BlogHandler):
     # Error page for users trying to edit/delete others' content
 
     def get(self):
-        self.render("editposterror.html")
+        self.render("editcommenterror.html")
 
 
 class DeleteComment(BlogHandler):
 
-    # Delete post - checks whether a user loged in, post exists, and permission
-
+    # Deletes the Comment info from db
     def get(self, post_id):
-        key = db.Key.from_path('Comment', post_id)
-        comments = db.get(key)
-
-        # key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-        # post = db.get(key)
-        if not self.user:
-            self.redirect("/login")
+        if self.user:
+            key = db.Key.from_path('Comment', int(post_id))
+            comments = db.get(key)
+            if not comments:
+                self.error(404)
+                return
+            elif self.user.name == comments.name:
+                name = comments.name
+                self.render("deletecomment.html", comments=comments, name=name)
+            else:
+                self.redirect("/editcommenterror")
         else:
-            self.render('deletecomment.html', post_id=id)
+            self.redirect("/login")
 
     def post(self, comment_id):
         if self.user:
             key = db.Key.from_path('Comment', int(comment_id))
             comments = db.get(key)
-
             comments.delete()
             self.redirect('/blog/')
 
@@ -598,23 +600,22 @@ def users_key(group='default'):
 
 
 app = webapp2.WSGIApplication([('/', MainPage),
-                    ('/unit2/rot13', Rot13),
-                    ('/unit2/signup', Unit2Signup),
-                    ('/unit2/welcome', Welcome),
-                    ('/blog/?', BlogFront),
-                    ('/blog/([0-9]+)', PostPage),
-                    ('/blog/newpost', NewPost),
-                    ('/signup', Register),
-                    ('/login', Login),
-                    ('/logout', Logout),
-                    ('/unit3/welcome', Unit3Welcome),
-                    ('/blog/editpost/([0-9]+)', EditPost),
-                    ('/blog/deletepost/([0-9]+)', DeletePost),
-                    ('/editposterror', EditPostError),
-                    ('/blog/([0-9]+)/like', LikePost),
-                    ('/blog/newcomment/([0-9]+)', NewComment),
-                    ('/blog/editcomment/([0-9]+)', EditComment),
-                    ('/blog/deletecomment/([0-9]+)', DeleteComment),
-                    ('/editcommenterror', EditCommentError),
-                    ],
-                    debug=True)
+                               ('/unit2/rot13', Rot13),
+                               ('/unit2/signup', Unit2Signup),
+                               ('/unit2/welcome', Welcome),
+                               ('/blog/?', BlogFront),
+                               ('/blog/([0-9]+)', PostPage),
+                               ('/blog/newpost', NewPost),
+                               ('/signup', Register),
+                               ('/login', Login),
+                               ('/logout', Logout),
+                               ('/unit3/welcome', Unit3Welcome),
+                               ('/blog/editpost/([0-9]+)', EditPost),
+                               ('/blog/deletepost/([0-9]+)', DeletePost),
+                               ('/editposterror', EditPostError),
+                               ('/blog/([0-9]+)/like', LikePost),
+                               ('/blog/newcomment/([0-9]+)', NewComment),
+                               ('/blog/editcomment/([0-9]+)', EditComment),
+                               ('/blog/deletecomment/([0-9]+)', DeleteComment),
+                               ('/editcommenterror', EditCommentError),
+                               ], debug=True)
