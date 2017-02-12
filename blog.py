@@ -140,10 +140,16 @@ class Post(db.Model):
     author = db.StringProperty()
     likes = db.IntegerProperty(default=0)
 
+    @property
+    def like_count(likes):
+        return likes.length
+
     def render(self):
         comments = Comment.all().filter('post_id =', self).order('-created')
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("post.html", p=self, comments=comments)
+
+# Database for comments
 
 
 class Comment(db.Model):
@@ -155,6 +161,12 @@ class Comment(db.Model):
     def render(self):
         self._render_text = self.content.replace('\n', '<br>')
         return render_str("comment.html", p=self)
+
+
+class Likes(db.Model):
+    name = db.StringProperty(required=True)
+    post_id = db.IntegerProperty()
+    comment_id = db.IntegerProperty()
 
 
 class BlogFront(BlogHandler):
@@ -186,18 +198,35 @@ class PostPage(BlogHandler):
 
 class LikePost(BlogHandler):
 
+    # Like functionality
+
     def post(self, post_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-        post = db.get(key)
-        if self.user:
-            if self.user.name == post.author:
-                error = "You can't like your post!"
+        if not self.user:
+            return self.redirect("/login")
+
+        name = self.user.name
+        q = db.Query(Likes)
+        q.filter('post_id =', int(post_id)).filter('name =', name)
+        for p in q.run():
+            return self.redirect('/blog')
+
+        id = int(post_id)
+        l = Likes(name=name, post_id=id)
+        l.put()
+        key = db.Key.from_path("Post", id, parent=blog_key())
+        posts = db.get(key)
+        if self.user.name != posts.author:
+            if posts is None:
+                return self.redirect('/blog')
+
+            if posts.likes is None:
+                posts.likes = 1
             else:
-                post.likes = post.likes + 1
-                p = Post(parent=blog_key(), likes=likes)
-                post.put()
+                posts.likes += 1
+            posts.put()
+            self.redirect('/blog')
         else:
-            self.redirect("/login")
+            self.redirect('/blog')
 
 
 class EditPost(BlogHandler):
@@ -307,7 +336,6 @@ class NewPost(BlogHandler):
             self.redirect("/login")
 
     # Comments
-    # Database for Comments
 
 
 class NewComment(BlogHandler):
