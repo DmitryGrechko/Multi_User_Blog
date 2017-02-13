@@ -16,7 +16,8 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 # Secret for hashing is generated via Python random and string functions
 
-SECRET = ''.join(random.choice(string.letters) for x in xrange(20))
+file = open('secret.txt', 'r’)
+SECRET = file.read()
 
 
 def render_str(template, **params):
